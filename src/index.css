@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+textarea {
+  resize: none;
+}
+
+#root {
+  margin: 0 auto;
+  max-width: 44rem;
+}
+
+main {
+  margin: 4rem 1rem;
+}
+
+section {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.daybook {
+  padding: 2rem;
+  background-color: lightcoral;
+  width: 16rem;
+}
+
+.daybook-form button{
+  display: block;
+}
