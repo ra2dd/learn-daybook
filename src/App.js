@@ -1,9 +1,12 @@
+import React, {useState} from "react";
 import Form from "./components/Form";
 import Daybook from "./components/Daybook"
 
 function App(props) {
 
-  const daybookList = props.daybookData?.map((dayItem) => (
+  const [dayData, setDayData] = useState(props.daybookData)
+
+  const daybookList = dayData.map((dayItem) => (
     <Daybook 
       id={dayItem.id} 
       content={dayItem.content} 
@@ -11,9 +14,14 @@ function App(props) {
       key={dayItem.id} />
   ));
 
+  function addDaybook(content) {
+    const date = new Date()
+    alert(content);
+  }
+
   return (
     <main>
-      <Form />
+      <Form addDaybook={addDaybook} />
       <section>
         {daybookList}
       </section>
