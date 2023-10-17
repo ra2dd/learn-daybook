@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import { parseISO, format } from "date-fns";
+import { nanoid } from "nanoid";
 import Form from "./components/Form";
 import Daybook from "./components/Daybook"
 
@@ -10,13 +12,14 @@ function App(props) {
     <Daybook 
       id={dayItem.id} 
       content={dayItem.content} 
-      date={dayItem.date}
+      date={format(parseISO(dayItem.date), 'LLL d')}
       key={dayItem.id} />
   ));
 
   function addDaybook(content) {
-    const date = new Date()
-    alert(content);
+    const newDaybook = { id: `daybook-${nanoid()}`, content, date: format(new Date(), 'yyyy-MM-dd') };
+    setDayData([...dayData, newDaybook]);
+    console.log(dayData)
   }
 
   return (
