@@ -1,11 +1,17 @@
 import React, {useState} from "react";
+import { format } from "date-fns";
 
 export default function Form(props) {
 
   const [content, setContent] = useState('');
+  const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
   function handleContentChange(event) {
     setContent(event.target.value);
+  }
+
+  function handleDateChange(event) {
+    setDate(event.target.value);
   }
 
   function handleSubmit(event) {
@@ -13,8 +19,9 @@ export default function Form(props) {
     if (content.length == 0) {
       alert('Note content cannot be empty.');
     } else {
-      props.addDaybook(content);
+      props.addDaybook(content, date);
       setContent('');
+      setDate('');
     }
   }
 
@@ -28,7 +35,12 @@ export default function Form(props) {
         value={content}
         onChange={handleContentChange}
       />
+      <input 
+        type="date"
+        onChange={handleDateChange}
+        value={date}
+       />
       <button type="submit">Add</button>
     </form>
-  )
+  );
 }

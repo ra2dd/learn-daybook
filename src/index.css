@@ -40,6 +40,6 @@ section {
   width: 16rem;
 }
 
-.daybook-form button{
+.daybook-form button, input[type="date"] {
   display: block;
 }
