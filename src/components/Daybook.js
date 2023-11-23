@@ -5,6 +5,14 @@ export default function Daybook(props) {
     <div className="daybook" id={props.id}>
       <p>{props.content}</p>
       <p>{props.date}</p>
+      <button
+        type="button"
+        onClick={() => props.toogleEditing(props.id, props.content, props.date)}
+      >Edit</button>
+      <button
+        type="button"
+        onClick={() => props.deleteDaybook(props.id)}
+      >Delete</button>
     </div>
-  )
+  );
 }
