@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { parseISO, format } from "date-fns";
 import { nanoid } from "nanoid";
 import Form from "./components/Form";
+import FormComplete from "./components/FormComplete";
 import EditForm from "./components/EditForm";
 import Daybook from "./components/Daybook";
 
@@ -23,7 +24,6 @@ function App(props) {
   function addDaybook(content, date) {
     const newDaybook = { id: `daybook-${nanoid()}`, content, date };
     setDayData([...dayData, newDaybook]);
-    console.log(dayData)
   }
 
   function editDaybook(id, content, date) {
@@ -57,7 +57,10 @@ function App(props) {
     setDayData(remainingDaybooks);
   }
 
-  function toogleEditing(id, content, date) {
+  async function toogleEditing(id, content, date) {
+    if (setEditing != false) {
+      await setEditing(false)
+    }
     setEditing([id, content, format(new Date(), 'yyyy-MM-dd')]);
   }
 
@@ -73,6 +76,11 @@ function App(props) {
         <Form addDaybook={addDaybook} />
       )
     }
+    // Add Form and Edit Form in same file
+    <FormComplete
+    addDaybook={addDaybook}
+    editDaybook={editDaybook}
+    isEditing={isEditing} />
   }
 
   return (
