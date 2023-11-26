@@ -4,7 +4,7 @@ export default function Daybook(props) {
   return (  
     <div className="daybook" id={props.id}>
       <p>{props.content}</p>
-      <p>{props.date}</p>
+      <p>{props.formattedDate}</p>
       <button
         type="button"
         onClick={() => props.toogleEditing(props.id, props.content, props.date)}

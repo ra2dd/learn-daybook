@@ -1,94 +1,17 @@
-import React, {useState} from "react";
-import { parseISO, format } from "date-fns";
-import { nanoid } from "nanoid";
-import Form from "./components/Form";
-import FormComplete from "./components/FormComplete";
-import EditForm from "./components/EditForm";
-import Daybook from "./components/Daybook";
+import React from "react";
+import FormWithCards from "./components/FormWithCards";
 
 function App(props) {
 
-  const [dayData, setDayData] = useState(props.daybookData)
-  const [isEditing, setEditing] = useState(false)
-
-  const daybookList = dayData.map((dayItem) => (
-    <Daybook 
-      id={dayItem.id} 
-      content={dayItem.content} 
-      date={format(parseISO(dayItem.date), 'LLL d')}
-      key={dayItem.id} 
-      deleteDaybook={deleteDaybook} 
-      toogleEditing={toogleEditing} />
-  ));
-
-  function addDaybook(content, date) {
-    const newDaybook = { id: `daybook-${nanoid()}`, content, date };
-    setDayData([...dayData, newDaybook]);
-  }
-
-  function editDaybook(id, content, date) {
-    const withEditDaybooks = dayData;
-    for (let daybook of withEditDaybooks) {
-      if(daybook.id == id) {
-        [daybook.id, daybook.content, daybook.date] = [id, content, date];
-      }
-    }
-    setDayData(withEditDaybooks);
-    setEditing(false);
-    /*
-    try {
-      const test = dayData
-      const withEditDaybooks = test.map((daybook) => {
-        console.log(`daybook.id=${daybook.id} id=${id}`);
-
-        if (id == daybook.id) {
-          [daybook.id, daybook.content, daybook.date] = [id, content, date];
-        }
-      });
-      setDayData(withEditDaybooks);
-    } catch (error) {
-      alert(JSON.stringify(error));
-    }
-    */
-  }
-
-  function deleteDaybook(id) {
-    const remainingDaybooks = dayData.filter((daybook) => id != daybook.id);
-    setDayData(remainingDaybooks);
-  }
-
-  async function toogleEditing(id, content, date) {
-    if (setEditing != false) {
-      await setEditing(false)
-    }
-    setEditing([id, content, format(new Date(), 'yyyy-MM-dd')]);
-  }
-
-  function getForm() {
-    if (isEditing != false) {
-      return (
-        <EditForm
-        editDaybook={editDaybook}
-        isEditing={isEditing} />
-      )
-    } else {
-      return (
-        <Form addDaybook={addDaybook} />
-      )
-    }
-    // Add Form and Edit Form in same file
-    <FormComplete
-    addDaybook={addDaybook}
-    editDaybook={editDaybook}
-    isEditing={isEditing} />
-  }
+  const DATA = [
+    { id: "daybook-0", content: "I read about IT", date: "2023-11-11" },
+    { id: "daybook-1", content: "I made components", date: "2023-11-12" },
+    { id: "daybook-2", content: "I read about management", date: "2023-11-13" },
+  ]
 
   return (
     <main>
-      {getForm()}
-      <section>
-        {daybookList}
-      </section>
+      <FormWithCards daybookData={DATA} />
     </main>
   );
 }
